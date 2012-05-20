@@ -146,6 +146,20 @@ def rpx_embed(context, extra = '', rpx_response = False):
     return common
 
 
+@register.inclusion_tag('django_rpx_plus/rpx_embed.html', takes_context = True)
+def rpx_embed_admin(context):
+    '''
+    Template tag that returns HTML iframe code which displays an embedded
+    RPX login widget on a standard admin login page.
+
+    @param context: Django context object. It's passed automatically because
+                    we have takes_context = True for inclusion_tag decorator.
+    @rtype: dict
+    @return: Template var dictionary for use in inclusion template snippet.
+    '''
+    return rpx_embed(context, extra=dict(next=context['request'].path))
+
+
 @register.inclusion_tag('django_rpx_plus/rpx_url.html', takes_context = True)
 def rpx_url(context, extra = '', rpx_response = False):
     '''
