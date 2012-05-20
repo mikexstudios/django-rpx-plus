@@ -263,7 +263,7 @@ def delete_associated_login(request, rpxdata_id):
         if num_logins > 1:
             #Okay, so we can delete this RPX login:
             r = RpxData.objects.get(id = rpxdata_id, user = request.user)
-            messages.success(request, _('Your %(provider)s login was successfully deleted.') % r.provider)
+            messages.success(request, _('Your %(provider)s login was successfully deleted.') % dict(provider=r.provider))
             r.delete()
     except RpxData.DoesNotExist:
         #Silent error.
